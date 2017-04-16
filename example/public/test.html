@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>test</title>
+
+        <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+
+    </head>
+    <body>
+
+        <input type="text" name="" id="find" value="">
+        <button type="button" name="button" onclick="find()">찾기</button>
+
+        <div class="box">
+
+        </div>
+
+        <script type="text/javascript">
+            function find() {
+
+                $.ajax({
+                    url: 'http://localhost:8080/api/users/' + $('#find').val(),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    type: 'GET',
+                    success: (result) => {
+
+                        $('.box').empty();
+                        $('.box').append(`
+                            <p>${result.id}</p>
+                            <p>${result.pw}</p>
+                            <img src="${result.imageUrl}" width="100" height="100"/>
+                            `);
+                    }
+                })
+            }
+        </script>
+
+    </body>
+</html>
